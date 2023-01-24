@@ -1,0 +1,118 @@
+{% extends 'admin_panel/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Page Content-->
+    <div class="page-content">
+
+        <div class="container-fluid">
+            <!-- Page-Title -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="page-title">{{page_title}}</h4>
+                            </div><!--end col-->
+
+
+                            {% if not instance %}
+                            <div class="col-auto align-self-center">
+                                <a class="btn btn-primary btn-sm text-white px-4 d-inline-block"  href="{% url 'web:create_contact' %}" ><i class="mdi mdi-plus mr-2"></i>Add New</a>
+                            </div><!--end col-->
+                            {% else %}
+                            <div class="col-auto align-self-center">
+                                <a class="btn btn-success btn-sm text-white px-4 d-inline-block"  href="{% url 'web:edit_contact' pk=instance.pk %}" ><i class="mdi mdi-pen mr-2"></i>Edit</a>
+                            </div><!--end col-->
+
+                            <div class="col-auto align-self-center">
+                                <a class="action-button remove btn btn-danger btn-sm text-white px-4 d-inline-block" data-id="{{s.pk}}" data-text="{{confirm_delete_message}}" data-title="Are you sure?" href="{% url 'web:delete_contact' pk=instance.pk %}" ><i class="las la-trash-alt mr-2"></i>Delete</a>
+                            </div><!--end col-->
+                            {% endif %}
+
+                        </div><!--end row-->
+                    </div><!-- end page-title-box -->
+                </div><!--end col-->
+            </div><!--end row-->
+            <!-- end page title end breadcrumb -->
+            <div class="col-sm-12" style="text-align: right;margin-bottom: 10px;">
+                <form method="get" action="{% url 'web:testimonial_list' %}">
+                    <li class="list-inline-item">
+                        <div class="input-group">
+
+                            <input name="q" type="text" placeholder="Search" value="{{ filter_data.q }}"
+                                class="form-control" />
+                            <span class="input-group-append" style="background-color: #daecfd;border-radius: 0 6px 6px 0;">
+                                <button type="submit" class="btn btn-soft-info btn-sm"><i
+                                        class="fas fa-search"></i></button>
+                            </span>
+
+
+                        </div>
+                    </li>
+                </form>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <!--end card-header-->
+                        <div class="card-body" style="line-height: 33px;font-size: 15px;font-weight: bold;">
+
+                            <div class="row">
+                                <div class="col-lg-2">Phone</div>
+                                <div class="col-lg-1">:</div>
+                                <div class="col-lg-7">{{instance.phone}}</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-2">Email</div>
+                                <div class="col-lg-1">:</div>
+                                <div class="col-lg-7">{{instance.email}}</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-2">Location</div>
+                                <div class="col-lg-1">:</div>
+                                <div class="col-lg-7"><a href="{{instance.location_url}}" target="_blank">{{instance.location}}</a></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-2">Instagram</div>
+                                <div class="col-lg-1">:</div>
+                                <div class="col-lg-7"><a href="{{instance.instagram}}" target="_blank">{{instance.instagram}}</a></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-2">Linkedin</div>
+                                <div class="col-lg-1">:</div>
+                                <div class="col-lg-7"><a href="{{instance.linkedin}}" target="_blank">{{instance.linkedin}}</a></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-2">Twitter</div>
+                                <div class="col-lg-1">:</div>
+                                <div class="col-lg-7"><a href="{{instance.twitter}}" target="_blank">{{instance.twitter}}</a></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-2">Whatsapp</div>
+                                <div class="col-lg-1">:</div>
+                                <div class="col-lg-7"><a href="{{instance.whatsapp}}" target="_blank">{{instance.whatsapp}}</a></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-2">Address</div>
+                                <div class="col-lg-1">:</div>
+                                <div class="col-lg-7">{{instance.address}}</div>
+                            </div>
+
+                        </div>
+                        <!--end card-body-->
+                    </div>
+                    <!--end card-->
+                </div> <!-- end col -->
+            </div>
+        </div><!-- container -->
+    <!-- end page content -->
+{% endblock content %}

@@ -1,0 +1,69 @@
+{% extends 'admin_panel/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Page Content-->
+    <div class="page-content">
+
+        <div class="container-fluid">
+            <!-- Page-Title -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="page-title">{{page_title}}</h4>
+
+                            </div><!--end col-->
+                            <div class="col-auto align-self-center">
+                                <a class="btn btn-success btn-sm text-white px-4 d-inline-block"  href="{% url 'web:create_testimonial' %}" ><i class="mdi mdi-plus mr-2"></i>Add New</a>
+                                <a class="btn btn-success btn-sm text-white px-4 d-inline-block"  href="{% url 'web:edit_testimonial' pk=instance.pk %}" style="background: #12a4ed !important;border-color: #12a4ed !important;"><i class="mdi mdi-pen mr-2"></i>Edit</a>
+                                <a data-id="{{ instance.pk }}" class="action-button remove redirect btn btn-primary btn-sm text-white px-4 d-inline-block"  href="{% url 'web:delete_testimonial' pk=instance.pk %}" data-text="{{ confirm_delete_message }}" data-title="Are you sure?" style="background: #f5325c !important;border-color: #f5325c !important;"><i class="mdi mdi-trash-can-outline mr-2"></i>Delete</a>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div><!-- end page-title-box -->
+                </div><!--end col-->
+            </div><!--end row-->
+            <!-- end page title end breadcrumb -->
+
+
+            <div class="row">
+                <div class="col-lg-8">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="blog-card">
+                                <div class= "text-center" >
+                                    <img src="{{instance.image.url}}" alt="" class="img-fluid rounded"/>
+                                </div>
+                                {% comment %} <span class="badge badge-purple px-3 py-2 bg-soft-primary font-weight-semibold mt-3">Photography</span>    {% endcomment %}
+                                <h4 class="my-3">
+                                    <a href="pages-blogs.html" class="">{{instance.title}}</a>
+                                </h4>
+                                <p>{{instance.designation}}</p>
+                                <p class="text-muted">{{instance.description | safe}}</p>
+                                <hr class="hr-dashed">
+                                <div class="d-flex justify-content-between">
+                                    <div class="meta-box">
+                                        <div class="media">
+                                            {% comment %} <img src="{{ instance.provider.logo.url }}" alt="" class="thumb-sm rounded-circle mr-2"> {% endcomment %}
+                                            <div class="media-body align-self-center text-truncate">
+                                                {% comment %} <h6 class="m-0 text-dark">{{ instance.provider.title }}</h6> {% endcomment %}
+                                                <ul class="p-0 list-inline mb-0">
+                                                    <li class="list-inline-item">{{instance.date_added|date:"M d, Y" }}</li>
+                                                    {% comment %} <li class="list-inline-item">by <a href="pages-blogs.html">admin</a></li> {% endcomment %}
+                                                </ul>
+                                            </div><!--end media-body-->
+                                        </div>
+                                    </div><!--end meta-box-->
+                                </div>
+                            </div><!--end blog-card-->
+
+                        </div><!--end card-body-->
+                    </div><!--end card-->
+
+                </div> <!--end col-->
+            </div>
+        </div><!-- container -->
+    <!-- end page content -->
+{% endblock content %}

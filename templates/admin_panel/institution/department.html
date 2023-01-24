@@ -1,0 +1,109 @@
+{% extends 'admin_panel/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Page Content-->
+    <div class="page-content">
+
+        <div class="container-fluid">
+            <!-- Page-Title -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="page-title">{{page_title}}</h4>
+                            </div><!--end col-->
+                            <div class="col-auto align-self-center">
+                                <a class="btn btn-success btn-sm text-white px-4 d-inline-block"  href="{% url 'institution:institution' pk=instance.institution.pk %}" style="background: #076797 !important;border-color: #076797 !important;"><i class="dripicons-arrow-thin-left mr-2"></i>Back To Institution</a>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div><!-- end page-title-box -->
+                </div><!--end col-->
+            </div><!--end row-->
+            <!-- end page title end breadcrumb -->
+
+            <!-- Department Faculty -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-white" style="display: flex;justify-content: space-between;">
+                            <div>
+                                <h4 class="card-title">Faculty</h4>
+                            </div>
+                            <div>
+                                <a class="btn btn-success btn-sm text-white px-4 d-inline-block"  href="{% url 'institution:create_department_faculty' pk=instance.pk %}" style="background: #12a4ed !important;border-color: #12a4ed !important;"><i class="mdi mdi-plus mr-2"></i>Add</a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                {% for f in faculty %}
+                                <div class="col-lg-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="media">
+                                                <img src="{{f.image.url}}" alt="" class="img-thumbnail" width="120" height="120">
+                                                <div class="media-body align-self-center ml-3 text-truncate">
+                                                    <h3 class="my-0 font-weight-bold">{{f.name}}</h3>
+                                                    <p class="text-muted mb-2 font-13">{{f.designation}}</p>
+                                                </div><!--end media-body-->
+                                            </div>
+                                        </div><!--end card-body-->
+                                    </div><!--end card-->
+                                    <div style="right: 25px;display: flex;float: right;position: absolute;bottom: 25px;">
+                                        <a href="{% url 'institution:edit_department_faculty' pk=f.pk %}" style="background-color: aliceblue;padding: 5px;border-radius: 3px;margin-right: 5px;"><i class="las la-pen text-info font-18"></i></a>
+                                        <a class="action-button remove btn btn-default btn-icon" style="background-color: aliceblue;padding: 5px;border-radius: 3px;"
+                                            data-id="{{f.pk}}" data-text="{{confirm_delete_message}}" data-title="Are you sure?" href="{% url 'institution:delete_department_faculty' pk=f.pk %}"><i class="las la-trash-alt text-danger font-18"></i></a>
+                                    </div>
+                                </div> <!-- end col -->
+                                {% endfor %}
+                            </div>
+                        </div><!--end card-body-->
+                    </div><!--end card-->
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+
+            <!-- Department Services -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-white" style="display: flex;justify-content: space-between;">
+                            <div>
+                                <h4 class="card-title">Services</h4>
+                            </div>
+                            <div>
+                                <a class="btn btn-success btn-sm text-white px-4 d-inline-block"  href="{% url 'institution:create_department_services' pk=instance.pk %}" style="background: #12a4ed !important;border-color: #12a4ed !important;"><i class="mdi mdi-plus mr-2"></i>Add</a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                {% for s in service %}
+                                <div class="col-lg-4">
+                                    <div class="card mb-3">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3 align-self-center text-center">
+                                                <img class="" src="{{s.image.url}}" alt="Card image" width="100">
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="card-body">
+                                                    <p class="card-text">{{s.description}}</p>
+                                                </div><!--end card-body-->
+                                            </div><!--end col-->
+                                        </div><!--end row-->
+                                    </div><!--end card-->
+                                    <div style="right: 15px;display: flex;float: right;position: absolute;bottom: 20px;">
+                                        <a href="{% url 'institution:edit_department_services' pk=s.pk %}" style="background-color: aliceblue;padding: 5px;border-radius: 3px;margin-right: 5px;"><i class="las la-pen text-info font-18"></i></a>
+                                        <a class="action-button remove btn btn-default btn-icon" style="background-color: aliceblue;padding: 5px;border-radius: 3px;"
+                                            data-id="{{s.pk}}" data-text="{{confirm_delete_message}}" data-title="Are you sure?" href="{% url 'institution:delete_department_services' pk=s.pk %}"><i class="las la-trash-alt text-danger font-18"></i></a>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- container -->
+    <!-- end page content -->
+{% endblock content %}

@@ -1,0 +1,56 @@
+{% extends 'admin_panel/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Page Content-->
+    <div class="page-content">
+
+        <div class="container-fluid">
+            <!-- Page-Title -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="page-title">{{page_title}}</h4>
+
+                            </div><!--end col-->
+                            <div class="col-auto align-self-center">
+                                <a class="btn btn-success btn-sm text-white px-4 d-inline-block"  href="{% url 'web:create_vision' %}" ><i class="mdi mdi-plus mr-2"></i>Add New</a>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div><!-- end page-title-box -->
+                </div><!--end col-->
+            </div><!--end row-->
+            <!-- end page title end breadcrumb -->
+
+
+            <div class="row">
+                {% for instance in instances %}
+                <div class="col-lg-4">
+                    <div class="card mb-3">
+                        <div class="row no-gutters">
+                            <div class="col-md-3 align-self-center text-center">
+                                <img class="" src="{{instance.image.url}}" alt="Card image" height="80">
+                            </div>
+                            <div class="col-md-9">
+                                <div class="card-body">
+                                    <p class="card-text">{{instance.description}}</p>
+                                    <div style="display:flex;justify-content: space-between;">
+                                        <p class="card-text" style="display: inline;"><small class="text-muted">Last updated {{instance.date_updated|date:"M d, Y" }}</small></p>
+                                        <div>
+                                            <a href="{% url 'web:edit_vision' pk=instance.pk %}" style="background-color: aliceblue;padding: 11px;border-radius: 8px;margin-right: 3px;" ><i class="las la-pen text-info font-18"></i></a>
+                                            <a class="action-button remove btn btn-default btn-icon" style="background-color: aliceblue;padding: 7px 11px;border-radius: 8px;"
+                                            data-id="{{instance.pk}}" data-text="{{confirm_delete_message}}" data-title="Are you sure?" href="{% url 'web:delete_vision' pk=instance.pk %}"><i class="las la-trash-alt text-danger font-18"></i></a>
+                                        </div>
+                                    </div>
+                                </div><!--end card-body-->
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div><!--end card-->
+                </div>
+                {% endfor %}
+            </div>
+        </div><!-- container -->
+    <!-- end page content -->
+{% endblock content %}

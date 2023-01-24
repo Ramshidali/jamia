@@ -1,0 +1,68 @@
+{% extends 'admin_panel/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="page-content">
+    <div class="container-fluid">
+
+        <!-- Page-Title -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="page-title">{{page_title}}</h4>
+
+                        </div><!--end col-->
+
+                    </div><!--end row-->
+                </div><!-- end page-title-box -->
+            </div><!--end col-->
+        </div><!--end row-->
+        <!-- end page title end breadcrumb -->
+
+
+        <div class="row">
+            {% comment %} {% load el_pagination_tags %}
+            {% paginate 20 instances %} {% endcomment %}
+            {% for s in instances %}
+
+            <div class="col-lg-3" style="margin-bottom: 15px; height:400px; display:inline-table;">
+
+
+                <img src="{{s.image.url}}" alt="Image" width="100%" style="max-height: 100%;">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h4 class="card-title">{{s.title}}</h4>
+                        </div><!--end col-->
+                    </div>  <!--end row-->
+                </div><!--end card-header-->
+                <div style="right: 25px;display: flex;float: right;position: absolute;top: 16px;">
+                    <a href="{% url 'web:edit_spotlight' pk=s.pk %}" style="background-color: aliceblue;padding: 6px;border-radius: 8px;margin-right: 3px;" ><i class="las la-pen text-info font-18"></i></a>
+                    <a class="action-button remove btn btn-default btn-icon" style="background-color: aliceblue;padding: 6px;border-radius: 8px;"
+                        data-id="{{s.pk}}" data-text="{{confirm_delete_message}}" data-title="Are you sure?" href="{% url 'web:delete_spotlight' pk=s.pk %}"><i class="las la-trash-alt text-danger font-18"></i></a>
+                </div>
+            </div>
+            {% endfor %}
+        </div> <!-- end row -->
+
+        {% comment %} {% get_pages %}
+        <div class="clearfix"></div>
+        <div class="row pagi my-3">
+            <div class="col-sm-6 col-xs-6 text-left my-pagina">{% show_pages %}</div>
+            <div class="col-sm-6 col-xs-6 text-right tot my-pagination align-items-center">
+                <div class="m-t-10">
+                    Showing {{title}}
+                    <span class="current_page_index">{{ pages.current_start_index }}</span> - <span
+                        class="current_end_status">{{ pages.current_end_index }}</span> of <span
+                        class="total_count">{{ pages.total_count }}</span>
+                </div>
+            </div>
+        </div> {% endcomment %}
+
+
+    </div>
+</div>
+{% endblock content %}

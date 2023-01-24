@@ -1,0 +1,73 @@
+{% extends 'admin_panel/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Page Content-->
+    <div class="page-content">
+
+        <div class="container-fluid">
+            <!-- Page-Title -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="page-title">{{page_title}}</h4>
+
+                            </div><!--end col-->
+
+                        </div><!--end row-->
+                    </div><!-- end page-title-box -->
+                </div><!--end col-->
+            </div><!--end row-->
+            <!-- end page title end breadcrumb -->
+            <div class="col-sm-12" style="text-align: right;margin-bottom: 10px;">
+                <form method="get" action="{% url 'web:management_team_list' %}">
+                    <li class="list-inline-item">
+                        <div class="input-group">
+
+                            <input name="q" type="text" placeholder="Search" value="{{ filter_data.q }}"
+                                class="form-control" />
+                            <span class="input-group-append" style="background-color: #daecfd;border-radius: 0 6px 6px 0;">
+                                <button type="submit" class="btn btn-soft-info btn-sm"><i
+                                        class="fas fa-search"></i></button>
+                            </span>
+
+
+                        </div>
+                    </li>
+                </form>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        {% comment %} <div class="card-header bg-white" style="display: flex;justify-content: space-between;">
+                            <div>
+                                <h4 class="card-title">Gallery</h4>
+                            </div>
+                            <div>
+                                <a class="btn btn-success btn-sm text-white px-4 d-inline-block"  href="{% url 'institution:create_institution_gallery' %}?institute={{instance.pk}}" style="background: #12a4ed !important;border-color: #12a4ed !important;"><i class="mdi mdi-plus mr-2"></i>Add</a>
+                            </div>
+                        </div> {% endcomment %}
+                        <div class="card-body">
+                            <div class="row text-center">
+                                {% for g in instances %}
+                                <div class="pb-3 col-sm-3">
+                                    <img src="{{g.image.url}}" alt="" height="150" width="100%">
+
+                                    <div style="right: 25px;display: flex;float: right;position: absolute;top: 16px;">
+                                        <a class="action-button remove btn btn-default btn-icon" style="background-color: aliceblue;padding: 6px;border-radius: 8px;"
+                                            data-id="{{g.pk}}" data-text="{{confirm_delete_message}}" data-title="Are you sure?" href="{% url 'institution:delete_institution_gallery' pk=g.pk %}"><i class="las la-trash-alt text-danger font-18"></i></a>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div><!--end card-body-->
+                    </div><!--end card-->
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+
+        </div><!-- container -->
+    <!-- end page content -->
+{% endblock content %}

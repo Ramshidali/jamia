@@ -1,0 +1,361 @@
+{% extends 'admin_panel/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Page Content-->
+    <div class="page-content">
+
+        <div class="container-fluid">
+            <!-- Page-Title -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="page-title">{{page_title}}</h4>
+                            </div><!--end col-->
+                            <div class="col-auto align-self-center">
+                                <a class="btn btn-success btn-sm text-white px-4 d-inline-block"  href="{% url 'institution:edit_institution' pk=instance.pk %}" style="background: #12a4ed !important;border-color: #12a4ed !important;"><i class="mdi mdi-pen mr-2"></i>Edit</a>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div><!-- end page-title-box -->
+                </div><!--end col-->
+            </div><!--end row-->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="dastone-profile">
+                                <div class="row">
+                                    <div class="col-lg-4 align-self-center mb-3 mb-lg-0">
+                                        <div class="dastone-profile-main">
+                                            <div class="dastone-profile-main-pic">
+                                                <img src="{{instance.image.url}}" alt="" width="110px" height="110px" class="rounded-circle">
+                                            </div>
+                                            <div class="dastone-profile_user-detail">
+                                                <h5 class="dastone-user-name">{{instance.name}}</h5>
+                                            </div>
+                                        </div>
+                                    </div><!--end col-->
+
+                                    <div class="col-lg-4 ml-auto align-self-center">
+                                        <ul class="list-unstyled personal-detail mb-0">
+                                            <li class=""><i class="las la-phone mr-2 text-secondary font-22 align-middle"></i> <b> phone </b> : +91 {{contact.phone}}</li>
+                                            <li class="mt-2"><i class="las la-envelope text-secondary font-22 align-middle mr-2"></i> <b> Email </b> : {{contact.email}}</li>
+                                            <li class="mt-2"><i class="las dripicons-calendar text-secondary font-22 align-middle mr-2"></i> <b> Location </b> : <a href="{{contact.location_url}}">{{contact.location}}</a></li>
+                                        </ul>
+                                    </div><!--end col-->
+                                </div><!--end row-->
+                            </div><!--end f_profile-->
+                        </div><!--end card-body-->
+                    </div> <!--end card-->
+                </div><!--end col-->
+            </div><!--end row-->
+
+            <div class="accordion" id="accordionExample">
+                <div class="card border mb-1 shadow-none">
+                    <!-- testimonials -->
+                    <div class="card-header custom-accordion  rounded-0" id="headingOne">
+                        <a href="ui-tabs-accordions.html" class="text-dark" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Testimonial
+                        </a>
+                    </div>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="table-responsive">
+                                        <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+
+                                                <tr>
+                                                    <th width="55">SL.No</th>
+                                                    <th width="350">Title</th>
+                                                    <th width="300">designation</th>
+                                                    <th  width="490">description</th>
+                                                    <th class="text-right">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for testimonial in testimonials %}
+                                                <tr>
+                                                    <td>{{forloop.counter}}</td>
+                                                    <td>{{testimonial.title}}</td>
+                                                    <td>{{testimonial.designation}}</td>
+                                                    <td>{{testimonial.description}}</td>
+                                                    <td class="text-right">
+                                                        {% comment %} <a href="{% url 'institution:institution_testimonial' pk=testimonial.pk %}?institution={{instance.pk}}"><i class="las la-eye text-info font-18"></i></a> {% endcomment %}
+                                                        <a href="{% url 'institution:edit_institution_testimonial' pk=testimonial.pk %}"><i class="las la-pen text-info font-18"></i></a>
+                                                        <a class="action-button remove btn btn-default btn-icon" style="padding:0;"
+                                                         data-id="{{testimonial.pk}}" data-text="{{confirm_delete_message}}" data-title="Are you sure?" href="{% url 'institution:delete_institution_testimonial' pk=testimonial.pk %}?institution={{instance.pk}}"><i class="las la-trash-alt text-danger font-18"></i></a>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+
+                                            </tbody>
+                                        </table>
+                                        <!--end /table-->
+                                    </div>
+                                    <!--end /tableresponsive-->
+                                    <!-- pagination -->
+                                </div> <!-- end col -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Department & Facility -->
+                    <div class="card-header custom-accordion  rounded-0" id="headingOne">
+                        <a href="ui-tabs-accordions.html" class="text-dark" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
+                            Departments & Facility
+                        </a>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="col-sm-4">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="table-responsive">
+                                                    <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                        <thead>
+                                                            <tr>
+                                                                <th colspan="3">Departments</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th width="55"></th>
+                                                                <th>Name</th>
+                                                                <th class="text-right">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for department in departments %}
+                                                            <tr>
+                                                                <td>{{forloop.counter}}</td>
+                                                                <td>{{department.department_name}}</td>
+                                                                <td class="text-right">
+                                                                    <a href="{% url 'institution:institution_department' pk=department.pk %}"><i class="las la-eye text-info font-18"></i></a>
+                                                                    <a href="{% url 'institution:edit_institution_department' pk=department.pk %}"><i class="las la-pen text-info font-18"></i></a>
+                                                                    <a class="action-button remove btn btn-default btn-icon" style="padding:0;"
+                                                                     data-id="{{department.pk}}" data-text="{{confirm_delete_message}}" data-title="Are you sure?" href="{% url 'institution:delete_institution_department' pk=department.pk %}"><i class="las la-trash-alt text-danger font-18"></i></a>
+                                                                </td>
+                                                            </tr>
+                                                            {% endfor %}
+
+                                                        </tbody>
+                                                    </table>
+                                                    <!--end /table-->
+                                                </div>
+                                                <!--end /tableresponsive-->
+                                                <!-- pagination -->
+                                            </div> <!-- end col -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="table-responsive">
+                                                    <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                        <thead>
+                                                            <tr>
+                                                                <th colspan="4">Facilities</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th width="55">SL.No</th>
+                                                                <th width="350">Title</th>
+                                                                <th width="780">designation</th>
+                                                                <th class="text-right">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for fasility in fasilities %}
+                                                            <tr>
+                                                                <td>{{forloop.counter}}</td>
+                                                                <td><img src="{{fasility.image.url}}" alt="" class="rounded-circle thumb-xs mr-1">{{fasility.title}}</td>
+                                                                <td>{{fasility.designation}}</td>
+                                                                <td class="text-right">
+                                                                    {% comment %} <a href="{% url 'institution:institution' pk=fasility.pk %}"><i class="las la-eye text-info font-18"></i></a> {% endcomment %}
+                                                                    <a href="{% url 'institution:edit_institution_facility' pk=fasility.pk %}"><i class="las la-pen text-info font-18"></i></a>
+                                                                    <a class="action-button remove btn btn-default btn-icon" style="padding:0;"
+                                                                     data-id="{{fasility.pk}}" data-text="{{confirm_delete_message}}" data-title="Are you sure?" href="{% url 'institution:delete_institution_facility' pk=fasility.pk %}"><i class="las la-trash-alt text-danger font-18"></i></a>
+                                                                </td>
+                                                            </tr>
+                                                            {% endfor %}
+
+                                                        </tbody>
+                                                    </table>
+                                                    <!--end /table-->
+                                                </div>
+                                                <!--end /tableresponsive-->
+                                                <!-- pagination -->
+                                            </div> <!-- end col -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Gallery -->
+                    <div class="card-header custom-accordion  rounded-0" id="headingOne">
+                        <a href="ui-tabs-accordions.html" class="text-dark" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne">
+                            Gallery
+                        </a>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="row text-center">
+                                {% for g in gallery %}
+                                <div class="pb-3 col-sm-3">
+                                    <img src="{{g.image.url}}" alt="" height="150" width="100%">
+
+                                    <div style="right: 25px;display: flex;float: right;position: absolute;top: 16px;">
+                                        <a class="action-button remove btn btn-default btn-icon" style="background-color: aliceblue;padding: 6px;border-radius: 8px;"
+                                            data-id="{{g.pk}}" data-text="{{confirm_delete_message}}" data-title="Are you sure?" href="{% url 'institution:delete_institution_gallery' pk=g.pk %}"><i class="las la-trash-alt text-danger font-18"></i></a>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div><!--end card-body-->
+                    </div>
+                    <!-- Management Teams -->
+                    <div class="card-header custom-accordion  rounded-0" id="headingOne">
+                        <a href="ui-tabs-accordions.html" class="text-dark" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseOne">
+                            Management Teams
+                        </a>
+                    </div>
+                    <div id="collapseFour" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="row">
+                                {% for m in management_team %}
+                                <div class="col-lg-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="media">
+                                                <img src="{{m.image.url}}" alt="" class="img-thumbnail" width="120" height="120">
+                                                <div class="media-body align-self-center ml-3 text-truncate">
+                                                    <h3 class="my-0 font-weight-bold">{{m.name}}</h3>
+                                                    <p class="text-muted mb-2 font-13">{{m.designation}}</p>
+                                                </div><!--end media-body-->
+                                            </div>
+                                        </div><!--end card-body-->
+                                    </div><!--end card-->
+                                    <div style="right: 25px;display: flex;float: right;position: absolute;bottom: 25px;">
+                                        <a href="{% url 'institution:edit_institution_management_team' pk=m.pk %}" style="background-color: aliceblue;padding: 5px;border-radius: 3px;margin-right: 5px;"><i class="las la-pen text-info font-18"></i></a>
+                                        <a class="action-button remove btn btn-default btn-icon" style="background-color: aliceblue;padding: 5px;border-radius: 3px;"
+                                            data-id="{{m.pk}}" data-text="{{confirm_delete_message}}" data-title="Are you sure?" href="{% url 'institution:delete_institution_management_team' pk=m.pk %}"><i class="las la-trash-alt text-danger font-18"></i></a>
+                                    </div>
+                                </div> <!-- end col -->
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- About -->
+                    <div class="card-header custom-accordion  rounded-0" id="headingOne">
+                        <a href="ui-tabs-accordions.html" class="text-dark" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseOne">
+                            About
+                        </a>
+                    </div>
+                    <div id="collapseFive" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="col-sm-12">
+                                {% if about %}
+                                    <div class="card mb-3">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-3 align-self-center text-center">
+                                                <img class="" src="{{about.image.url}}" alt="Card image" height="80">
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="card-header">
+                                                    <div class="row align-items-center">
+                                                        <div class="col" style="display: flex;justify-content: space-between;">
+                                                            <div>
+                                                                <h4 class="card-title">{{about.title}}</h4>
+                                                            </div>
+                                                            <div>
+                                                                <a href="{% url 'institution:edit_institution_about' pk=about.pk %}"><i class="las la-pen text-info font-18"></i></a>
+                                                                <a class="action-button remove btn btn-default btn-icon" style="padding:0;"
+                                                                data-id="{{about.pk}}" data-text="{{confirm_delete_message}}" data-title="Are you sure?"
+                                                                href="{% url 'institution:delete_institution_about' pk=about.pk %}"><i class="las la-trash-alt text-danger font-18"></i></a>
+                                                            </div>
+                                                        </div><!--end col-->
+                                                        <div class="col-auto">
+                                                            <!-- <span class="badge badge-outline-light"></span> -->
+                                                        </div><!--end col-->
+                                                    </div>  <!--end row-->
+                                                </div><!--end card-header-->
+                                                <div class="card-body">
+                                                    <p class="card-text">{{about.description}}</p>
+                                                </div><!--end card-body-->
+                                            </div><!--end col-->
+                                        </div><!--end row-->
+                                    </div><!--end card-->
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Contact -->
+                    <div class="card-header custom-accordion  rounded-0" id="headingOne">
+                        <a href="ui-tabs-accordions.html" class="text-dark" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseOne">
+                            Contact
+                        </a>
+                    </div>
+                    <div id="collapseSix" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="table-responsive">
+                                        <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+
+                                                <tr>
+                                                    <th width="50">SL.No</th>
+                                                    <th>phone</th>
+                                                    <th>email</th>
+                                                    <th width="300">location</th>
+                                                    <th>facebook</th>
+                                                    <th>instagram</th>
+                                                    <th>linkedin</th>
+                                                    <th>twitter</th>
+                                                    <th>whatsapp</th>
+                                                    <th class="text-right">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>{{forloop.counter}}</td>
+                                                    <td>{{contact.phone}}</td>
+                                                    <td>{{contact.email}}</td>
+                                                    <td><a href="{{contact.location_url}}" target="_blank">{{contact.location}}</a></td>
+                                                    <td><a href="{{contact.facebook}}" target="_blank">{{contact.facebook}}</a></td>
+                                                    <td><a href="{{contact.instagram}}" target="_blank">{{contact.instagram}}</a></td>
+                                                    <td><a href="{{contact.linkedin}}" target="_blank">{{contact.linkedin}}</a></td>
+                                                    <td><a href="{{contact.twitter}}" target="_blank">{{contact.twitter}}</a></td>
+                                                    <td><a href="{{contact.whatsapp}}" target="_blank">{{contact.whatsapp}}</a></td>
+                                                    <td class="text-right">
+                                                        {% comment %} <a href="{% url 'institution:institution' pk=contact.pk %}"><i class="las la-eye text-info font-18"></i></a> {% endcomment %}
+                                                        <a href="{% url 'institution:edit_institution_contact' pk=contact.pk %}"><i class="las la-pen text-info font-18"></i></a>
+                                                        <a class="action-button remove btn btn-default btn-icon" style="padding:0;"
+                                                         data-id="{{contact.pk}}" data-text="{{confirm_delete_message}}" data-title="Are you sure?" href="{% url 'institution:delete_institution_contact' pk=contact.pk %}"><i class="las la-trash-alt text-danger font-18"></i></a>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                        <!--end /table-->
+                                    </div>
+                                    <!--end /tableresponsive-->
+                                    <!-- pagination -->
+                                </div> <!-- end col -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div><!-- container -->
+    <!-- end page content -->
+{% endblock content %}

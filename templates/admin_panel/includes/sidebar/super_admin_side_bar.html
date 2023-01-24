@@ -1,0 +1,121 @@
+
+{% load static %}
+<div class="left-sidenav">
+    <!-- LOGO -->
+    <div class="brand">
+        <a href="{% url 'app' %}" class="logo">
+            <span>
+                <img src="{% static 'admin_panel/assets/images/logo/JGI Logo.png' %}" alt="logo-small" class="logo-sm" style="height: 50px;">
+            </span>
+            {% comment %} <span>
+                <img src="{% static 'admin_panel/assets/images/logo/JGI Logo.png' %}" alt="logo-large" class="logo-lg logo-light">
+                <img src="{% static 'admin_panel/assets/images/logo/JGI Logo.png' %}" alt="logo-large" class="logo-lg logo-dark">
+            </span> {% endcomment %}
+        </a>
+    </div>
+    <!--end logo-->
+    <div class="menu-content h-100" data-simplebar>
+        <ul class="metismenu left-sidenav-menu">
+            <li class="menu-label mt-0">Main</li>
+            <li>
+                <a href="{% url 'app' %}"> <i data-feather="home" class="align-self-center menu-icon"></i><span>Dashboard</span></a>
+            </li>
+
+            <li>
+                <a href="javascript: void(0);"> <i data-feather="layers" class="align-self-center menu-icon"></i><span>Manage Spotlight</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="nav-second-level" aria-expanded="false">
+
+                    <li class="nav-item d-flex justify-content-between">
+                        <a class="nav-link" href="{% url 'web:spotlight' %}"><i class="ti-control-record"></i>Spotlight</a>
+                        <a class="nav-link" href="{% url 'web:create_spotlight' %}"><i class="ti-plus"></i></a>
+                    </li>
+
+                    <li class="nav-item d-flex justify-content-between">
+                        <a class="nav-link" href="{% url 'web:news_list' %}"><i class="ti-control-record"></i>News</a>
+                        <a class="nav-link" href="{% url 'web:create_news' %}"><i class="ti-plus"></i></a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="nav-item d-flex justify-content-between">
+                <a class="nav-link" href="{% url 'web:gallery_list' %}"><i class="ti-control-record"></i>Gallery</a>
+                <a class="nav-link" href="{% url 'web:create_gallery' %}"><i class="ti-plus"></i></a>
+            </li>
+
+            <li class="nav-item d-flex justify-content-between">
+                <a class="nav-link" href="{% url 'web:testimonial_list' %}"><i class="ti-control-record"></i>Testimonial</a>
+                <a class="nav-link" href="{% url 'web:create_testimonial' %}"><i class="ti-plus"></i></a>
+            </li>
+
+            <li>
+                <a href="javascript: void(0);"> <i data-feather="layers" class="align-self-center menu-icon"></i><span>Manage About</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="nav-second-level" aria-expanded="false">
+
+                    <li class="nav-item d-flex justify-content-between">
+                        <a class="nav-link" href="{% url 'web:vision_list' %}"><i class="ti-control-record"></i>Vision</a>
+                        <a class="nav-link" href="{% url 'web:create_vision' %}"><i class="ti-plus"></i></a>
+                    </li>
+
+                    <li class="nav-item d-flex justify-content-between">
+                        <a class="nav-link" href="{% url 'web:mission_list' %}"><i class="ti-control-record"></i>Mission</a>
+                        <a class="nav-link" href="{% url 'web:create_mission' %}"><i class="ti-plus"></i></a>
+                    </li>
+
+                    <li class="nav-item d-flex justify-content-between">
+                        <a class="nav-link" href="{% url 'web:management_team_list' %}"><i class="ti-control-record"></i>Management Team</a>
+                        <a class="nav-link" href="{% url 'web:create_management_team' %}"><i class="ti-plus"></i></a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li>
+                <a href="javascript: void(0);"> <i data-feather="layers" class="align-self-center menu-icon"></i><span>Manage Institution</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="nav-second-level" aria-expanded="false">
+
+                    <li class="nav-item d-flex justify-content-between">
+                        <a class="nav-link" href="{% url 'institution:institution_list' %}"><i class="ti-control-record"></i>Institution</a>
+                        <a class="nav-link" href="{% url 'institution:create_institution' %}"><i class="ti-plus"></i></a>
+                    </li>
+
+                    {% comment %} <li class="nav-item d-flex justify-content-between">
+                        <a class="nav-link" href=""><i class="ti-control-record"></i>Event</a>
+                        <a class="nav-link" href=""><i class="ti-plus"></i></a>
+                    </li> {% endcomment %}
+
+                </ul>
+            </li>
+
+            <li class="nav-item d-flex justify-content-between">
+                <a class="nav-link" href="{% url 'web:careers_list' %}"><i class="ti-control-record"></i>Careers</a>
+                <a class="nav-link" href="{% url 'web:create_careers' %}"><i class="ti-plus"></i></a>
+            </li>
+
+            <li class="nav-item d-flex justify-content-between">
+                <a class="nav-link" href="{% url 'web:applied_careers' %}"><i class="ti-control-record"></i>Careers Applications</a>
+            </li>
+
+            <li>
+                <a href="javascript: void(0);"> <i data-feather="layers" class="align-self-center menu-icon"></i><span>Manage Contact</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="nav-second-level" aria-expanded="false">
+
+                    <li class="nav-item d-flex justify-content-between">
+                        <a class="nav-link" href="{% url 'web:contact_list' %}"><i class="ti-control-record"></i>Contact</a>
+                        <a class="nav-link" href="{% url 'web:create_contact' %}"><i class="ti-plus"></i></a>
+                    </li>
+
+                    <li class="nav-item d-flex justify-content-between">
+                        <a class="nav-link" href="{% url 'web:enquiry_list' %}"><i class="ti-control-record"></i>Enquiry</a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="nav-item d-flex justify-content-between">
+                <a class="nav-link" href="/app/accounts/logout/"><i class="ti-control-record"></i>Logout</a>
+            </li>
+
+        </ul>
+    </div>
+</div>
